@@ -38,7 +38,6 @@ namespace Travelbooking
             string userinputvalidate = splitString[0];
             string userinputdata = splitString[1];
 
-            
 
             //Console.WriteLine(userinputvalidate);
             //Console.WriteLine(userinputdata);
@@ -59,7 +58,10 @@ namespace Travelbooking
                         Console.WriteLine("Hotel Name: " + Data.HotelName);
                         Console.WriteLine("Price: " + Data.Price);
                         displaycount++;
-                        
+                        if (displaycount < continentcount)
+                        {
+                            Console.WriteLine("----------------------------------------------------------------------------------------------");
+                        }
 
                     }
                 }
@@ -70,14 +72,39 @@ namespace Travelbooking
             }
             else if(userinputvalidate == "Country")
             {
-                
+                var countrySpecificHotels = TripList.Where(r => r.Country == userinputdata);
+                if (countrySpecificHotels != null)
+                {
+                   // Console.WriteLine("data exists");
+                    int countrycount = countrySpecificHotels.Count();
+                    Console.WriteLine("Result For Country= " + userinputdata + " (" + countrycount + ")");
+                    int displaycount = 0;
+                    foreach (var Data in countrySpecificHotels)
+                    {
+                        Console.WriteLine("Continent: " + Data.Continent);
+                        Console.WriteLine("Country: " + Data.Country);
+                        Console.WriteLine("City: " + Data.City);
+                        Console.WriteLine("Hotel Name: " + Data.HotelName);
+                        Console.WriteLine("Price: " + Data.Price);
+                        displaycount++;
+                        if (displaycount < countrycount)
+                        {
+                            Console.WriteLine("----------------------------------------------------------------------------------------------");
+                        }
+
+                    }
                 }
                 else
                 {
                     Console.WriteLine("No records found");
                 }
             }
-           
+            else
+            {
+                Console.WriteLine("Incorrect Query");
+            }
+
+
 
 
 
@@ -85,3 +112,4 @@ namespace Travelbooking
           
         }
     }
+}
